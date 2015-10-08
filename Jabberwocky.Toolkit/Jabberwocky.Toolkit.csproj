@@ -51,7 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="jabberwocky.snk" />
-    <None Include="RunMeToUploadNuGetPackage.cmd" />
+    <None Include="Jabberwocky.Toolkit.nuspec" />
+    <None Include="package.builder.json" />
+    <None Include="packages.config" />
+    <None Include="UploadNuGetPackage.cmd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -61,6 +64,13 @@
   <PropertyGroup>
     <PreBuildEvent>del $(TargetDir)*.nupkg /Q</PreBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\NuGet.Package.Builder.1.0.9\build\NuGet.Package.Builder.targets" Condition="Exists('..\packages\NuGet.Package.Builder.1.0.9\build\NuGet.Package.Builder.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NuGet.Package.Builder.1.0.9\build\NuGet.Package.Builder.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Package.Builder.1.0.9\build\NuGet.Package.Builder.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -8,6 +8,6 @@ REM To run this script from within Visual Studio, right-click on this file from 
 REM SET THIS_SCRIPTS_DIRECTORY=%~dp0
 REM PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%THIS_SCRIPTS_DIRECTORY%DoNotModify\UploadNuGetPackage.ps1'"
 
-C:\C#\Jabberwocky.Toolkit\Jabberwocky.Toolkit\_CreateNewNuGetPackage\DoNotModify\NuGet.exe push C:\C#\Jabberwocky.Toolkit\Jabberwocky.Toolkit\bin\release\*.nupkg -Source C:\NugetRepository -NonInteractive
+C:\C#\Jabberwocky.Toolkit\packages\NuGet.Package.Builder.1.0.9\tools\NuGet.exe push C:\C#\Jabberwocky.Toolkit\Jabberwocky.Toolkit\bin\release\*.nupkg -Source C:\NugetRepository -NonInteractive
 
 pause
