@@ -11,7 +11,7 @@ namespace Jabberwocky.Toolkit.Validation
   {
     #region Methods
     /// <summary>
-    /// (extension) Verifies that the object is not null. Throws an exception if verification fails.
+    /// Verifies that the object is not null. Throws an exception if verification fails.
     /// </summary>
     /// <param name="instance">Object to verify.</param>
     public static void VerifyThatObjectIsNotNull(this Object instance)
@@ -20,7 +20,7 @@ namespace Jabberwocky.Toolkit.Validation
     }
 
     /// <summary>
-    /// (extension) Verifies that the object is not null. Throws an exception (with custom message) if verification fails.
+    /// Verifies that the object is not null. Throws an exception (with custom message) if verification fails.
     /// </summary>
     /// <param name="instance">Object to verify.</param>
     /// <param name="exceptionMessage">Custom message to use in exception.</param>
@@ -33,7 +33,7 @@ namespace Jabberwocky.Toolkit.Validation
     }
 
     /// <summary>
-    /// (extension) Verifies that the string is not null and not empty. Throws an exception if verification fails.
+    /// Verifies that the string is not null and not empty. Throws an exception if verification fails.
     /// </summary>
     /// <param name="instance">String to verify.</param>
     public static void VerifyThatStringIsNotNullAndNotEmpty(this String instance)
@@ -42,7 +42,7 @@ namespace Jabberwocky.Toolkit.Validation
     }
 
     /// <summary>
-    /// (extension) Verifies that the string is not null and not empty. Throws an exception (with custom message) if verification fails.
+    /// Verifies that the string is not null and not empty. Throws an exception (with custom message) if verification fails.
     /// </summary>
     /// <param name="instance">String to verify.</param>
     /// <param name="exceptionMessage">Custom message to use in exception.</param>
