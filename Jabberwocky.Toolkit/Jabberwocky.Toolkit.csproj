@@ -51,8 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="jabberwocky.snk" />
-    <None Include="packages.config" />
-    <None Include="_CreateNewNuGetPackage\RunMeToUploadNuGetPackage.cmd" />
+    <None Include="RunMeToUploadNuGetPackage.cmd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
