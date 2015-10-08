@@ -7,6 +7,8 @@ namespace Jabberwocky.Toolkit.IO
   {
     #region Properties
     Boolean EndOfStream { get; }
+
+    Int64 Position { get; set; }
     #endregion
 
     #region Methods
