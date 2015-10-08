@@ -1,5 +1,5 @@
 ﻿
-namespace Jabberwocky.Tookit_UnitTests
+namespace Jabberwocky.Tookit_UnitTests.Validation
 {
   using System;
   using FluentAssertions;
