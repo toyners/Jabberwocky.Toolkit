@@ -55,10 +55,9 @@ namespace Jabberwocky.Toolkit.Validation
     }
 
     /// <summary>
-    /// Verifies that the generic list is not null and not empty. Throws an exception (with custom message) if verification fails.
+    /// Verifies that the generic list is not null and not empty. Throws an exception if verification fails.
     /// </summary>
-    /// <param name="instance">List to verify.</param>
-    /// <param name="exceptionMessage">Custom message to use in exception.</param>
+    /// <param name="list">List to verify.</param>
     public static void VerifyThatListIsNotNullAndNotEmpty<T>(this List<T> list)
     {
       if (list == null || list.Count == 0)
@@ -70,7 +69,7 @@ namespace Jabberwocky.Toolkit.Validation
     /// <summary>
     /// Verifies that the generic list is not null and not empty. Throws an exception (with custom message) if verification fails.
     /// </summary>
-    /// <param name="instance">List to verify.</param>
+    /// <param name="list">List to verify.</param>
     /// <param name="exceptionMessage">Custom message to use in exception.</param>
     public static void VerifyThatListIsNotNullAndNotEmpty<T>(this List<T> list, String exceptionMessage)
     {
@@ -80,6 +79,10 @@ namespace Jabberwocky.Toolkit.Validation
       }
     }
 
+    /// <summary>
+    /// Verifies that the array is not null and not empty. Throws an exception if verification fails.
+    /// </summary>
+    /// <param name="array">Array to verify.</param>
     public static void VerifyThatArrayIsNotNullAndNotEmpty(this Array array)
     {
       if (array == null || array.Length == 0)
@@ -88,6 +91,11 @@ namespace Jabberwocky.Toolkit.Validation
       }
     }
 
+    /// <summary>
+    /// Verifies that the array is not null and not empty. Throws an exception (with custom message) if verification fails.
+    /// </summary>
+    /// <param name="array">Array to verify.</param>
+    /// <param name="exceptionMessage">Custom message to use in exception.</param>
     public static void VerifyThatArrayIsNotNullAndNotEmpty(this Array array, String exceptionMessage)
     {
       if (array == null || array.Length == 0)

@@ -12,7 +12,7 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
   {
     #region Methods
     [Test]
-    public void Validation_ObjectIsNull_ExpectedExceptionIsThrown()
+    public void VerifyThatObjectIsNotNull_ObjectIsNull_ExpectedExceptionIsThrown()
     {
       Object instance = null;
       Action action = () => instance.VerifyThatObjectIsNotNull();
@@ -21,7 +21,7 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
     }
 
     [Test]
-    public void Validation_ObjectIsNullWithCustomMessage_ExpectedExceptionIsThrown()
+    public void VerifyThatObjectIsNotNull_ObjectIsNullWithCustomMessage_ExpectedExceptionIsThrown()
     {
       Object instance = null;
       Action action = () => instance.VerifyThatObjectIsNotNull("Custom exception message.");
@@ -30,7 +30,7 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
     }
 
     [Test]
-    public void Validation_ObjectIsNotNull_ExceptionNotThrown()
+    public void VerifyThatObjectIsNotNull_ObjectIsNotNull_ExceptionNotThrown()
     {
       Object instance = new Object();
       Action action = () => instance.VerifyThatObjectIsNotNull();
@@ -39,7 +39,7 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
     }
 
     [Test]
-    public void Validation_StringIsNull_ExpectedExceptionIsThrown()
+    public void VerifyThatStringIsNotNullAndNotEmpty_StringIsNull_ExpectedExceptionIsThrown()
     {
       String instance = null;
       Action action = () => instance.VerifyThatStringIsNotNullAndNotEmpty();
@@ -48,7 +48,7 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
     }
 
     [Test]
-    public void Validation_StringIsEmpty_ExpectedExceptionIsThrown()
+    public void VerifyThatStringIsNotNullAndNotEmpty_StringIsEmpty_ExpectedExceptionIsThrown()
     {
       String instance = String.Empty;
       Action action = () => instance.VerifyThatStringIsNotNullAndNotEmpty();
@@ -57,7 +57,7 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
     }
 
     [Test]
-    public void Validation_StringIsNullWithCustomMessage_ExpectedExceptionIsThrown()
+    public void VerifyThatStringIsNotNullAndNotEmpty_StringIsNullWithCustomMessage_ExpectedExceptionIsThrown()
     {
       String instance = null;
       Action action = () => instance.VerifyThatStringIsNotNullAndNotEmpty("Custom exception message.");
@@ -66,7 +66,7 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
     }
 
     [Test]
-    public void Validation_StringIsEmptyWithCustomMessage_ExpectedExceptionIsThrown()
+    public void VerifyThatStringIsNotNullAndNotEmpty_StringIsEmptyWithCustomMessage_ExpectedExceptionIsThrown()
     {
       String instance = String.Empty;
       Action action = () => instance.VerifyThatStringIsNotNullAndNotEmpty("Custom exception message.");
@@ -75,7 +75,7 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
     }
 
     [Test]
-    public void Validation_StringIsNotEmpty_ExceptionNotThrown()
+    public void VerifyThatStringIsNotNullAndNotEmpty_StringIsNotEmpty_ExceptionNotThrown()
     {
       String instance = "Not Empty";
       Action action = () => instance.VerifyThatStringIsNotNullAndNotEmpty();
