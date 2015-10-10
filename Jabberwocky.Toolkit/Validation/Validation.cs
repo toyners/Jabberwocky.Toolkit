@@ -11,6 +11,27 @@ namespace Jabberwocky.Toolkit.Validation
   {
     #region Methods
     /// <summary>
+    /// Returns true if the generic list is null or empty. Otherwise false.
+    /// </summary>
+    /// <typeparam name="T">Type contained within list.</typeparam>
+    /// <param name="list">Generic list instance to test.</param>
+    /// <returns>True if null or empty, otherwise false.</returns>
+    public static Boolean IsNullOrEmpty<T>(this List<T> list)
+    {
+      return (list == null || list.Count == 0);
+    }
+
+    /// <summary>
+    /// Returns true if the array is null or empty. Otherwise false.
+    /// </summary>
+    /// <param name="array">Array instance to test.</param>
+    /// <returns>True if null or empty, otherwise false.</returns>
+    public static Boolean IsNullOrEmpty(this Array array)
+    {
+      return (array == null || array.Length == 0);
+    }
+
+    /// <summary>
     /// Verifies that the object is not null. Throws an exception if verification fails.
     /// </summary>
     /// <param name="instance">Object to verify.</param>
