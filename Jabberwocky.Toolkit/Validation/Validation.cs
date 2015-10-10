@@ -53,6 +53,48 @@ namespace Jabberwocky.Toolkit.Validation
         throw new Exception(exceptionMessage);
       }
     }
+
+    /// <summary>
+    /// Verifies that the generic list is not null and not empty. Throws an exception (with custom message) if verification fails.
+    /// </summary>
+    /// <param name="instance">List to verify.</param>
+    /// <param name="exceptionMessage">Custom message to use in exception.</param>
+    public static void VerifyThatListIsNotNullAndNotEmpty<T>(this List<T> list)
+    {
+      if (list == null || list.Count == 0)
+      {
+        throw new Exception("List is null or empty.");
+      }
+    }
+
+    /// <summary>
+    /// Verifies that the generic list is not null and not empty. Throws an exception (with custom message) if verification fails.
+    /// </summary>
+    /// <param name="instance">List to verify.</param>
+    /// <param name="exceptionMessage">Custom message to use in exception.</param>
+    public static void VerifyThatListIsNotNullAndNotEmpty<T>(this List<T> list, String exceptionMessage)
+    {
+      if (list == null || list.Count == 0)
+      {
+        throw new Exception(exceptionMessage);
+      }
+    }
+
+    public static void VerifyThatArrayIsNotNullAndNotEmpty(this Array array)
+    {
+      if (array == null || array.Length == 0)
+      {
+        throw new Exception("Array is null or empty.");
+      }
+    }
+
+    public static void VerifyThatArrayIsNotNullAndNotEmpty(this Array array, String exceptionMessage)
+    {
+      if (array == null || array.Length == 0)
+      {
+        throw new Exception(exceptionMessage);
+      }
+    }
     #endregion
   }
 }
