@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\IStreamReader.cs" />
+    <Compile Include="Assembly\AssemblyOperations.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,7 @@
     <None Include="packages.config" />
     <None Include="UploadNuGetPackage.cmd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
