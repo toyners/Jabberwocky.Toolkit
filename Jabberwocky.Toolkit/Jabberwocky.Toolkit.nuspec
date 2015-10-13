@@ -13,7 +13,7 @@
 		<!-- This will use the AssemblyVersion -->
 		<version>$version$</version>
 		<title>Jabberwocky Toolkit</title>
-		<description>A tookit containing general purpose interfaces and low level helper code.</description>
+		<description>A tookit containing general purpose interfaces and helper code.</description>
 		<authors>Benjamin Toynbee</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<copyright>Copyright 2015</copyright>
