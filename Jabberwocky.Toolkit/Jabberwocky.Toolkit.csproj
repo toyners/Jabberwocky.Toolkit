@@ -49,6 +49,7 @@
     <Compile Include="IO\FileReader.cs" />
     <Compile Include="IO\IStreamReader.cs" />
     <Compile Include="Assembly\AssemblyOperations.cs" />
+    <Compile Include="String\StringOperations.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
