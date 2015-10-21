@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\FileReader.cs" />
     <Compile Include="IO\IStreamReader.cs" />
     <Compile Include="Assembly\AssemblyOperations.cs" />
     <Compile Include="Validation\Validation.cs" />
