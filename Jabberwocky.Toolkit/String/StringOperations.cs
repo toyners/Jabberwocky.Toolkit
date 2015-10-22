@@ -7,83 +7,117 @@ namespace Jabberwocky.Toolkit.String
   using System.Text;
   using System.Threading.Tasks;
 
+  /// <summary>
+  /// Provides extension methods for the string class.
+  /// </summary>
   public static class StringOperations
   {
     #region Methods
+    /// <summary>
+    /// Extracted a specified field from a string. Field is based on a seperator and qualifier.
+    /// </summary>
+    /// <param name="instance">String to extract field from.</param>
+    /// <param name="seperator">The seperator to use when recognising fields.</param>
+    /// <param name="qualifier">The qualifier to use when escaping seperator within fields.</param>
+    /// <param name="fieldIndex">The index of the field to extract.</param>
+    /// <returns>Extracted field string.</returns>
     public static String ExtractField(this String instance, String seperator, Char qualifier, UInt32 fieldIndex)
     {
       Int32 position = 0;
-      Int32 index = 0;
-      while (true)
+      Int32 index = GetLastIndexOfUnqualifiedSeperator(instance, seperator, qualifier, 0);
+
+      if (index == -1)
       {
-        Int32 seperateIndex = 0;
+        return instance;
+      }
 
-        Boolean isQualified = false;
-        for (; index < instance.Length; index++)
+      UInt32 fieldCount = fieldIndex;
+      while (fieldCount > 0)
+      {
+        position = index + 1;
+        if (position == instance.Length)
         {
-          if (instance[index] == qualifier)
+          // field index is outside the last possible index in the line.
+          if (fieldCount == 1)
           {
-            isQualified = !isQualified;
-          }
-
-          if (!isQualified && instance[index] == seperator[seperateIndex])
-          {
-            break;
+            return String.Empty;
           }
         }
 
+        index = GetLastIndexOfUnqualifiedSeperator(instance, seperator, qualifier, position);
         if (index == -1)
         {
-          return instance.Substring(position, instance.Length - position);
+          if (fieldCount > 1)
+          {
+            // field index is outside the last possible index in the line.
+            throw new IndexOutOfRangeException(String.Format("Index {0} is out of range in line '{1}' when using seperator (\"{2}\") and qualifier ('{3}').",
+              fieldIndex,
+              instance,
+              seperator,
+              qualifier));
+          }
+
+          index = instance.Length;
+          RemoveQualifiers(instance, qualifier, ref position, ref index);
+          return instance.Substring(position, index - position);
         }
 
-        seperateIndex++;
-        Boolean gotSeperator = true;
-        for (; seperateIndex < seperator.Length; seperateIndex++)
+        fieldCount--;
+      }
+
+      index -= seperator.Length - 1;
+
+      RemoveQualifiers(instance, qualifier, ref position, ref index);
+
+      return instance.Substring(position, index - position);
+    }
+
+    private static Int32 GetLastIndexOfUnqualifiedSeperator(String line, String seperator, Char qualifier, Int32 startingIndex)
+    {
+      // Assuming that startingIndex is not at the end of the line.
+      Int32 index = startingIndex;
+      Int32 seperatorIndex = 0;
+      Boolean isQualified = false;
+      for (; index < line.Length; index++)
+      {
+        if (line[index] == qualifier)
         {
-          index++;
-          if (index == instance.Length)
-          {
-            // End of line. Seperator was not completed.
-            break;
-          }
-
-          if (instance[index] != seperator[seperateIndex])
-          {
-            gotSeperator = false;
-            break;
-          }
+          isQualified = !isQualified;
         }
 
-        if (!gotSeperator)
+        if (isQualified)
         {
           continue;
         }
 
-        if (fieldIndex == 1)
+        if (line[index] == seperator[seperatorIndex])
         {
-          position = index;
-        }
-        else if (fieldIndex == 0)
-        {
-          //Int32 count = index - position;
-          if (instance[position] == qualifier)
+          seperatorIndex++;
+          if (seperatorIndex == seperator.Length)
           {
-            position++;
+            return index;
           }
 
-          if (index > 0 && instance[index - 1] == qualifier)
-          {
-            index--;
-          }
-
-          return instance.Substring(position, index - position);
+          continue;
         }
 
-        fieldIndex--;
+        seperatorIndex = 0;
       }
 
-      throw new NotImplementedException();
+      return -1; // No unqualified seperator found.
+    }
+
+    private static void RemoveQualifiers(String line, Char qualifier, ref Int32 startingIndex, ref Int32 endingIndex)
+    {
+      if (line[startingIndex] == qualifier)
+      {
+        startingIndex++;
+      }
+
+      if (endingIndex > 0 && line[endingIndex - 1] == qualifier)
+      {
+        endingIndex--;
+      }
     }
     #endregion
   }
