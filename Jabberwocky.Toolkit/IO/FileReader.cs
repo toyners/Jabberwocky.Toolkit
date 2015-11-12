@@ -51,6 +51,7 @@ namespace Jabberwocky.Toolkit.IO
 
       this.stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 8192, FileOptions.RandomAccess);
       this.buffer = new Byte[bufferSize];
+      this.Name = path;
     }
     #endregion
 
@@ -109,6 +110,11 @@ namespace Jabberwocky.Toolkit.IO
         return this.stream.Length;
       }
     }
+
+    /// <summary>
+    /// Gets the full name of the file. 
+    /// </summary>
+    public String Name { get; private set; }
 
     private Boolean BlockIsEmpty 
     { 

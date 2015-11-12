@@ -18,6 +18,11 @@ namespace Jabberwocky.Toolkit.IO
     /// Gets or sets the position to read from within the stream.
     /// </summary>
     Int64 Position { get; set; }
+      
+    /// <summary>
+    /// Gets the full name of the file. 
+    /// </summary>
+    String Name { get; }
     #endregion
 
     #region Methods
