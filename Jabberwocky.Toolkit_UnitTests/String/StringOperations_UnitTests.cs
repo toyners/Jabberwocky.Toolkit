@@ -11,14 +11,6 @@ namespace Jabberwocky.Tookit_UnitTests.String
   {
     #region Methods
     [Test]
-    public void ExtractField_SeperatorNotInLine_WholeLineReturned()
-    {
-      String line = "ABCD";
-
-      line.ExtractField(",", '\0', 0).Should().Be("ABCD");
-    }
-
-    [Test]
     public void ExtractField_IndexBeyondLine_ThrowsMeaningfulException()
     {
       String line = "A,B,C,D";
@@ -39,6 +31,7 @@ namespace Jabberwocky.Tookit_UnitTests.String
     }
 
     [Test]
+    [TestCase(0, "ABCD", ",", "ABCD")] // Seperator not in the line so whole line returned.
     [TestCase(0, ",B,C,D", ",", "")]
     [TestCase(0, "A,B,C,D", ",", "A")]
     [TestCase(1, "A,B,C,D", ",", "B")]
