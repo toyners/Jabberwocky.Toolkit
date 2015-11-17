@@ -44,8 +44,3 @@ module ``String Operations UnitTests`` =
     let ``Index beyond last seperator so meaningful exception is thrown``() =
         (fun () -> StringOperations.ExtractField("A,B,C,", ",", '|', 4u) |> ignore) 
         |> should (throwWithMessage "Index 4 is out of range in line 'A,B,C,' when using seperator (\",\") and qualifier ('|').") typeof<System.IndexOutOfRangeException>
-
-    [<Test>]
-    [<TestCase(0u, "ABCD", ",", "ABCD")>]
-    let ``a``(index: uint32, line: string, seperator: string, expectedResult: string) =
-        StringOperations.ExtractField(line, seperator, '|', index) |> should equal expectedResult
