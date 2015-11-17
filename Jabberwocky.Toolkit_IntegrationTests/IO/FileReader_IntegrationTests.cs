@@ -31,6 +31,33 @@ namespace Jabberwocky.Toolkit_IntegrationTests.IO
     }
 
     [Test]
+    [TestCase(1)]
+    [TestCase(3)]
+    [TestCase(99)]
+    public void FileReader_FileContainsEOFCharactersOnly_TreatedAsEmptyFile(Int32 characterCount)
+    {
+      // Arrange
+      Byte[] bytes = new Byte[characterCount];
+      for (Int32 i = 0; i < characterCount; i++)
+      {
+        bytes[i] = 0;
+      }
+
+      String filePath = Path.GetTempPath() + Path.GetRandomFileName();
+      File.WriteAllBytes(filePath, bytes);
+
+      // Act
+      FileReader fileReader = new FileReader(filePath);
+
+      // Assert
+      fileReader.EndOfStream.Should().BeTrue();
+      fileReader.Position.Should().Be(fileReader.Length);
+
+      // Cleanup
+      this.Cleanup(fileReader, filePath);
+    }
+
+    [Test]
     [TestCase("Jabberwocky.Toolkit_IntegrationTests.Resources.OneLine_NoTrailingTerminator.txt", 10)]
     [TestCase("Jabberwocky.Toolkit_IntegrationTests.Resources.OneLine_StandardTrailingTerminator.txt", 12)]
     public void ReadLine_OneLineFileWithDifferentTrailingLineTerminators_FilePositionIsCorrect(String resourceName, Int32 expectedPosition)
@@ -46,7 +73,7 @@ namespace Jabberwocky.Toolkit_IntegrationTests.IO
       result.Should().Be("First Line");
       fileReader.Position.Should().Be(expectedPosition);
       fileReader.EndOfStream.Should().BeTrue();
-      
+
       // Cleanup
       this.Cleanup(fileReader, filePath);
     }
@@ -105,7 +132,7 @@ namespace Jabberwocky.Toolkit_IntegrationTests.IO
     [TestCase(9, "\n2nd Line")]
     [TestCase(10, "2nd Line")]
     [TestCase(20, "3rd Line")]
-    public void ReadLine_ChangePositionAndReadLine_ReturnLineIsCorrect(Int32 position, String expectedResult)
+    public void ReadLine_ChangePositionAndReadLine_ReturnedLineIsCorrect(Int32 position, String expectedResult)
     {
       // Arrange
       String filePath = this.CreateTestFile("Jabberwocky.Toolkit_IntegrationTests.Resources.ThreeLines_StandardTrailingTerminator.txt");
@@ -183,7 +210,7 @@ namespace Jabberwocky.Toolkit_IntegrationTests.IO
       this.Cleanup(fileReader, filePath);
     }
 
-    [TestCase]
+    [Test]
     public void Position_MovePositionOutsideBuffer_StateIsCorrect()
     {
       // Arrange
@@ -198,6 +225,95 @@ namespace Jabberwocky.Toolkit_IntegrationTests.IO
       fileReader.ReadLine().Should().Be("Line");
       fileReader.Position.Should().Be(10);
       fileReader.EndOfStream.Should().BeFalse();
+
+      // Cleanup
+      this.Cleanup(fileReader, filePath);
+    }
+
+    [Test]
+    public void ReadLine_FileHasBOM_BOMIsNotReturned()
+    {
+      // Arrange
+      String filePath = this.CreateTestFile("Jabberwocky.Toolkit_IntegrationTests.Resources.OneLine_BOM.txt");
+      FileReader fileReader = new FileReader(filePath);
+
+      // Act
+      String result = fileReader.ReadLine();
+
+      // Assert
+      result.Should().Be("First Line");
+
+      // Cleanup
+      this.Cleanup(fileReader, filePath);
+    }
+
+    [Test]
+    [TestCase(239, 187, 65, "ï»A")]
+    [TestCase(239, 187, 0, "ï»")]
+    [TestCase(239, 65, 66, "ïAB")]
+    [TestCase(239, 0, 0, "ï")]
+    public void ReadLine_FileHasCorruptedBOM_CorruptedBOMIsReturned(Byte firstByte, Byte secondByte, Byte thirdByte, String expectedResult)
+    {
+      // Arrange
+      String filePath = Path.GetTempPath() + Path.GetRandomFileName();
+      File.WriteAllBytes(filePath, new Byte[] { firstByte, secondByte, thirdByte });
+      FileReader fileReader = new FileReader(filePath);
+
+      // Act
+      String result = fileReader.ReadLine();
+
+      // Assert
+      result.Should().Be(expectedResult);
+
+      // Cleanup
+      this.Cleanup(fileReader, filePath);
+    }
+
+    [Test]
+    public void ReadLine_FileIsEmpty_ReturnsNull()
+    {
+      String filePath = Path.GetTempFileName();
+
+      FileReader fileReader = new FileReader(filePath);
+
+      String result = fileReader.ReadLine();
+
+      result.Should().BeNull();
+    }
+
+    [Test]
+    public void ReadLine_FileEndsWithMultipleEOFCharacters_ReturnsCorrectLineAndIsInEndOfFileState()
+    {
+      String filePath = Path.GetTempPath() + Path.GetRandomFileName();
+      File.WriteAllBytes(filePath, new Byte[] { (Byte)'A', 0, 0 });
+      FileReader fileReader = new FileReader(filePath);
+
+      // Act
+      String result = fileReader.ReadLine();
+
+      // Assert
+      result.Should().Be("A");
+      fileReader.EndOfStream.Should().BeTrue();
+      fileReader.Position.Should().Be(fileReader.Length);
+
+      // Cleanup
+      this.Cleanup(fileReader, filePath);
+    }
+
+    [Test]
+    public void ReadLine_FileHasEOFCharacterInMiddle_ReturnsCorrectLineAndIsInEndOfFileState()
+    {
+      String filePath = Path.GetTempPath() + Path.GetRandomFileName();
+      File.WriteAllBytes(filePath, new Byte[] { (Byte)'A', 0, (Byte)'B' });
+      FileReader fileReader = new FileReader(filePath);
+
+      // Act
+      String result = fileReader.ReadLine();
+
+      // Assert
+      result.Should().Be("A");
+      fileReader.EndOfStream.Should().BeTrue();
+      fileReader.Position.Should().Be(fileReader.Length);
 
       // Cleanup
       this.Cleanup(fileReader, filePath);

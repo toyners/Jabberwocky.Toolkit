@@ -25,6 +25,8 @@ namespace Jabberwocky.Toolkit.IO
     private Int64 position;
 
     private FileStream stream;
+
+    private StringBuilder builder = new StringBuilder(100);
     #endregion
 
     #region Construction
@@ -52,6 +54,14 @@ namespace Jabberwocky.Toolkit.IO
       this.stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 8192, FileOptions.RandomAccess);
       this.buffer = new Byte[bufferSize];
       this.Name = path;
+
+      if (this.stream.ReadByte() == 0)
+      {
+        this.SeekToEndOfFile();
+        return;
+      }
+
+      this.stream.Seek(0, SeekOrigin.Begin);
     }
     #endregion
 
@@ -61,7 +71,7 @@ namespace Jabberwocky.Toolkit.IO
     /// </summary>
     public Boolean EndOfStream
     {
-      get 
+      get
       {
         return this.stream.Position == this.stream.Length && this.BlockIsEmpty;
       }
@@ -72,12 +82,12 @@ namespace Jabberwocky.Toolkit.IO
     /// </summary>
     public Int64 Position
     {
-      get 
+      get
       {
         return this.position;
       }
 
-      set 
+      set
       {
         Int64 difference = value - this.position;
         if (Math.Abs(difference) > this.blockSize)
@@ -114,13 +124,14 @@ namespace Jabberwocky.Toolkit.IO
     /// <summary>
     /// Gets the full name of the file. 
     /// </summary>
-    public String Name { get; private set; }
+    public String Name
+    { get; private set; }
 
-    private Boolean BlockIsEmpty 
-    { 
-      get 
-      { 
-        return this.blockSize == -1 || this.blockIndex >= this.blockSize; 
+    private Boolean BlockIsEmpty
+    {
+      get
+      {
+        return this.blockSize == -1 || this.blockIndex >= this.blockSize;
       }
     }
     #endregion
@@ -149,15 +160,26 @@ namespace Jabberwocky.Toolkit.IO
     /// <returns>The line from the stream.</returns>
     public String ReadLine()
     {
+      if (this.EndOfStream)
+      {
+        return null;
+      }
+
       Byte nextByte;
-      StringBuilder builder = new StringBuilder(100);
+      this.builder.Clear();
       Int32 lineTerminatorIndex = 0;
 
-      while (this.TryGetNextByte(out nextByte))
+      if (this.Position == 0)
+      {
+        this.ResolveAnyByteOrderMarks();
+      }
+
+      Boolean gotValidByte;
+      while ((gotValidByte = this.TryGetNextByte(out nextByte)))
       {
         if (nextByte != lineTerminator[lineTerminatorIndex])
         {
-          builder.Append((Char)nextByte);
+          this.builder.Append((Char)nextByte);
           continue;
         }
 
@@ -169,13 +191,49 @@ namespace Jabberwocky.Toolkit.IO
         }
       }
 
-      if (builder.Length != 0)
+      if (this.builder.Length != 0)
       {
-        this.position += builder.Length;
-        return builder.ToString();
+        if (this.EndOfStream || !gotValidByte)
+        {
+          this.SeekToEndOfFile();
+        }
+        else
+        { 
+          this.position += builder.Length;
+        }
+
+        return this.builder.ToString();
       }
 
       return null;
+    }
+
+    private void ResolveAnyByteOrderMarks()
+    {
+      Byte firstByte, secondByte, thirdByte;
+      this.TryGetNextByte(out firstByte);
+
+      if (firstByte == 239 && this.TryGetNextByte(out secondByte))
+      {
+        if (secondByte == 187 && this.TryGetNextByte(out thirdByte))
+        {
+          if (thirdByte != 191)
+          {
+            this.builder.Append((Char)firstByte);
+            this.builder.Append((Char)secondByte);
+            this.builder.Append((Char)thirdByte);
+          }
+        }
+        else
+        {
+          this.builder.Append((Char)firstByte);
+          this.builder.Append((Char)secondByte);
+        }
+      }
+      else
+      {
+        this.builder.Append((Char)firstByte);
+      }
     }
 
     protected virtual void Dispose(Boolean disposing)
@@ -212,13 +270,19 @@ namespace Jabberwocky.Toolkit.IO
       }
 
       nextByte = this.buffer[this.blockIndex++];
-      return true;
+      return (nextByte != 0);
     }
 
     private void ReadNextBlock()
     {
       this.blockSize = this.stream.Read(this.buffer, 0, this.buffer.Length);
       this.blockIndex = 0;
+    }
+
+    private void SeekToEndOfFile()
+    {
+      this.Position = this.Length;
+      this.blockSize = -1;
     }
     #endregion
   }
