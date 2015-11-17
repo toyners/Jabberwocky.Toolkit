@@ -11,7 +11,20 @@ namespace Jabberwocky.Toolkit.IO
   /// </summary>
   public class FileReader : IStreamReader
   {
+    #region Enums
+    private enum TryGetNextByteResult
+    {
+      EndOfStream,
+      EndOfFileCharacter,
+      Valid
+    }
+    #endregion
+
     #region Fields
+    private const Byte EF = 239;
+    private const Byte BB = 187;
+    private const Byte BF = 191;
+
     private Byte[] lineTerminator = new Byte[] { (Byte)'\r', (Byte)'\n' };
 
     private Int32 blockIndex;
@@ -174,8 +187,8 @@ namespace Jabberwocky.Toolkit.IO
         this.ResolveAnyByteOrderMarks();
       }
 
-      Boolean gotValidByte;
-      while ((gotValidByte = this.TryGetNextByte(out nextByte)))
+      TryGetNextByteResult tryGetNextByteResult;
+      while ((tryGetNextByteResult = this.TryGetNextByte(out nextByte)) == TryGetNextByteResult.Valid)
       {
         if (nextByte != lineTerminator[lineTerminatorIndex])
         {
@@ -193,7 +206,7 @@ namespace Jabberwocky.Toolkit.IO
 
       if (this.builder.Length != 0)
       {
-        if (this.EndOfStream || !gotValidByte)
+        if (this.EndOfStream || tryGetNextByteResult == TryGetNextByteResult.EndOfFileCharacter)
         {
           this.SeekToEndOfFile();
         }
@@ -206,34 +219,6 @@ namespace Jabberwocky.Toolkit.IO
       }
 
       return null;
-    }
-
-    private void ResolveAnyByteOrderMarks()
-    {
-      Byte firstByte, secondByte, thirdByte;
-      this.TryGetNextByte(out firstByte);
-
-      if (firstByte == 239 && this.TryGetNextByte(out secondByte))
-      {
-        if (secondByte == 187 && this.TryGetNextByte(out thirdByte))
-        {
-          if (thirdByte != 191)
-          {
-            this.builder.Append((Char)firstByte);
-            this.builder.Append((Char)secondByte);
-            this.builder.Append((Char)thirdByte);
-          }
-        }
-        else
-        {
-          this.builder.Append((Char)firstByte);
-          this.builder.Append((Char)secondByte);
-        }
-      }
-      else
-      {
-        this.builder.Append((Char)firstByte);
-      }
     }
 
     protected virtual void Dispose(Boolean disposing)
@@ -256,12 +241,40 @@ namespace Jabberwocky.Toolkit.IO
       this.disposed = true;
     }
 
-    private Boolean TryGetNextByte(out Byte nextByte)
+    private void ResolveAnyByteOrderMarks()
+    {
+      Byte firstByte, secondByte, thirdByte;
+      this.TryGetNextByte(out firstByte);
+
+      if (firstByte == EF && this.TryGetNextByte(out secondByte) == TryGetNextByteResult.Valid)
+      {
+        if (secondByte == BB && this.TryGetNextByte(out thirdByte) == TryGetNextByteResult.Valid)
+        {
+          if (thirdByte != BF)
+          {
+            this.builder.Append((Char)firstByte);
+            this.builder.Append((Char)secondByte);
+            this.builder.Append((Char)thirdByte);
+          }
+        }
+        else
+        {
+          this.builder.Append((Char)firstByte);
+          this.builder.Append((Char)secondByte);
+        }
+      }
+      else
+      {
+        this.builder.Append((Char)firstByte);
+      }
+    }
+
+    private TryGetNextByteResult TryGetNextByte(out Byte nextByte)
     {
       if (this.EndOfStream)
       {
         nextByte = 0;
-        return false;
+        return TryGetNextByteResult.EndOfStream;
       }
 
       if (this.BlockIsEmpty)
@@ -270,7 +283,7 @@ namespace Jabberwocky.Toolkit.IO
       }
 
       nextByte = this.buffer[this.blockIndex++];
-      return (nextByte != 0);
+      return (nextByte != 0 ? TryGetNextByteResult.Valid : TryGetNextByteResult.EndOfFileCharacter);
     }
 
     private void ReadNextBlock()
