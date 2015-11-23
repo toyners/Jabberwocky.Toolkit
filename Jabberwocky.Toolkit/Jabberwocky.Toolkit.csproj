@@ -51,6 +51,7 @@
     <Compile Include="IO\IStreamReader.cs" />
     <Compile Include="Assembly\AssemblyOperations.cs" />
     <Compile Include="IO\IStreamReaderFactory.cs" />
+    <Compile Include="Path\PathOperations.cs" />
     <Compile Include="String\StringOperations.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
