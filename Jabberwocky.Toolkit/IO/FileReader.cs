@@ -256,6 +256,9 @@ namespace Jabberwocky.Toolkit.IO
             this.builder.Append((Char)secondByte);
             this.builder.Append((Char)thirdByte);
           }
+
+          // Ensure that the position is set correctly to account for the BOM
+          this.position = 3;
         }
         else
         {
