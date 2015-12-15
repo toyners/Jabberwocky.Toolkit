@@ -2,12 +2,8 @@
 namespace Jabberwocky.Toolkit.Assembly
 {
   using System;
-  using System.Collections.Generic;
   using System.IO;
-  using System.Linq;
   using System.Reflection;
-  using System.Text;
-  using System.Threading.Tasks;
 
   /// <summary>
   /// Extension methods for the Assembly class.
@@ -25,6 +21,11 @@ namespace Jabberwocky.Toolkit.Assembly
     {
       using (Stream manifestStream = assembly.GetManifestResourceStream(resourceName))
       {
+        if (manifestStream == null)
+        {
+          throw new NullReferenceException(String.Format("Embedded resource '{0}' not found in assembly '{1}'.", resourceName, assembly.GetName().Name));
+        }
+
         using (Stream outputStream = File.Create(filePath))
         {
           Byte[] buffer = new Byte[8192];
