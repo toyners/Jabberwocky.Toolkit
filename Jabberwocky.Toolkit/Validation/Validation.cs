@@ -3,24 +3,10 @@ namespace Jabberwocky.Toolkit.Validation
 {
   using System;
   using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
-  using System.Threading.Tasks;
 
   public static class Validation
   {
     #region Methods
-    /// <summary>
-    /// Returns true if the generic list is null or empty. Otherwise false.
-    /// </summary>
-    /// <typeparam name="T">Type contained within list.</typeparam>
-    /// <param name="list">Generic list instance to test.</param>
-    /// <returns>True if null or empty, otherwise false.</returns>
-    public static Boolean IsNullOrEmpty<T>(this List<T> list)
-    {
-      return (list == null || list.Count == 0);
-    }
-
     /// <summary>
     /// Returns true if the array is null or empty. Otherwise false.
     /// </summary>

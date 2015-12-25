@@ -55,6 +55,7 @@
     <Compile Include="AssemblyOperations Unit Tests.fs" />
     <Compile Include="Path Operations UnitTests.fs" />
     <Compile Include="String Operations UnitTests.fs" />
+    <Compile Include="ListOperations Unit Tests.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

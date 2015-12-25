@@ -12,30 +12,6 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
   {
     #region Methods
     [Test]
-    public void IsNullOrEmpty_ListIsNull_ReturnsTrue()
-    { 
-      List<String> list = null;
-
-      list.IsNullOrEmpty().Should().BeTrue();
-    }
-
-    [Test]
-    public void IsNullOrEmpty_ListIsEmpty_ReturnsTrue()
-    {
-      List<String> list = new List<String>();
-
-      list.IsNullOrEmpty().Should().BeTrue();
-    }
-
-    [Test]
-    public void IsNullOrEmpty_ListIsNotEmpty_ReturnsFalse()
-    {
-      List<String> list = new List<String>() { "String" };
-
-      list.IsNullOrEmpty().Should().BeFalse();
-    }
-
-    [Test]
     public void IsNullOrEmpty_ArrayIsNull_ReturnsTrue()
     {
       String[] array = null;
