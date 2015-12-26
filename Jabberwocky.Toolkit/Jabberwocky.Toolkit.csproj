@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\DirectoryOperations.cs" />
     <Compile Include="IO\FileReader.cs" />
     <Compile Include="IO\FileReaderFactory.cs" />
     <Compile Include="IO\IStreamReader.cs" />
