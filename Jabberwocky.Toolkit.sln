@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jabberwocky.Toolkit", "Jabberwocky.Toolkit\Jabberwocky.Toolkit.csproj", "{90F09705-99BC-4477-B44E-6CBE6D40BBC3}"
 EndProject
@@ -10,6 +10,11 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Jabberwocky.Toolkit_FUnitTests", "Jabberwocky.Toolkit_FUnitTests\Jabberwocky.Toolkit_FUnitTests.fsproj", "{AC41EEE9-3009-411B-8E4C-0AC2CDB16742}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jabberwocky.Toolkit_IntegrationTests", "Jabberwocky.Toolkit_IntegrationTests\Jabberwocky.Toolkit_IntegrationTests.csproj", "{6B6EFE0D-01B1-4A62-AFE0-8351FEC8D7EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A724E6E4-53D7-48C9-98CC-88E2130BFDDD}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
