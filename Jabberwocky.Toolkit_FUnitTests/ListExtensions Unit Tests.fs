@@ -6,18 +6,18 @@ open FsUnit
 open Jabberwocky.Toolkit.List
 open NUnit.Framework
 
-module ``ListOperations UnitTests`` =
+module ``ListExtensions Unit Tests`` =
 
     [<Test>]
     let ``Null Generic list reference returns true``() =
-        ListOperations.IsEmpty(null) |> should be True
+        ListExtensions.IsNullOrEmpty(null) |> should be True
 
     [<Test>]
     let ``Empty Generic list returns true``() =
         let emptyList = System.Collections.Generic.List<String>()
-        ListOperations.IsEmpty(emptyList) |> should be True
+        ListExtensions.IsNullOrEmpty(emptyList) |> should be True
 
     [<Test>]
     let ``Nonempty Generic list returns false``() =
         let emptyList = System.Collections.Generic.List<String>([|"a"|])
-        ListOperations.IsEmpty(emptyList) |> should be False
+        ListExtensions.IsNullOrEmpty(emptyList) |> should be False

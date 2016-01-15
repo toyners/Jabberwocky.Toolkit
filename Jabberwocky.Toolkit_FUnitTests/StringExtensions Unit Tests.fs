@@ -4,7 +4,7 @@ open Jabberwocky.Toolkit.String
 open FsUnit
 open NUnit.Framework
 
-module ``String Operations UnitTests`` =
+module ``StringExtensions Unit Tests`` =
     
     [<Test>]
     [<TestCase(0u, "ABCD", ",", "ABCD")>]
@@ -33,14 +33,14 @@ module ``String Operations UnitTests`` =
     [<TestCase(3u, "A<sep>B<sep>C<sep>|D<sep>4", "<sep>", "D<sep>4")>]
     [<TestCase(2u, "A<sep>B<sep>|C<sep>3<sep>D", "<sep>", "C<sep>3<sep>D")>]
     let ``Correct field returned from different extract scenarios``(index: uint32, line: string, seperator: string, expectedResult: string) =
-        StringOperations.ExtractField(line, seperator, '|', index) |> should equal expectedResult
+        StringExtensions.ExtractField(line, seperator, '|', index) |> should equal expectedResult
 
     [<Test>]
     let ``Index beyond line so meaningful exception is thrown``() =
-        (fun () -> StringOperations.ExtractField("A,B,C,D", ",", '|', 4u) |> ignore) 
+        (fun () -> StringExtensions.ExtractField("A,B,C,D", ",", '|', 4u) |> ignore) 
         |> should (throwWithMessage "Index 4 is out of range in line 'A,B,C,D' when using seperator (\",\") and qualifier ('|').") typeof<System.IndexOutOfRangeException>
 
     [<Test>]
     let ``Index beyond last seperator so meaningful exception is thrown``() =
-        (fun () -> StringOperations.ExtractField("A,B,C,", ",", '|', 4u) |> ignore) 
+        (fun () -> StringExtensions.ExtractField("A,B,C,", ",", '|', 4u) |> ignore) 
         |> should (throwWithMessage "Index 4 is out of range in line 'A,B,C,' when using seperator (\",\") and qualifier ('|').") typeof<System.IndexOutOfRangeException>

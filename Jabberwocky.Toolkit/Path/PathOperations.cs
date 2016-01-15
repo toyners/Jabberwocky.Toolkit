@@ -3,7 +3,7 @@ namespace Jabberwocky.Toolkit.Path
 {
   using System;
   using System.IO;
-  using Validation;
+  using String;
 
   /// <summary>
   /// Provides methods implementing path like functionality.
@@ -12,7 +12,7 @@ namespace Jabberwocky.Toolkit.Path
   {
     #region Methods
     /// <summary>
-    /// Will complete a directory path by appending a seperator character (\) is necessary.
+    /// Will complete a directory path by appending a seperator character (\) if it is missing.
     /// </summary>
     /// <param name="directoryPath">Directory path to append the seperator character to.</param>
     /// <returns>Directory path with seperator character appended.</returns>

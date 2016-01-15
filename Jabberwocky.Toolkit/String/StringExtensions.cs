@@ -2,15 +2,11 @@
 namespace Jabberwocky.Toolkit.String
 {
   using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Text;
-  using System.Threading.Tasks;
 
   /// <summary>
-  /// Provides extension methods for the string class.
+  /// Extension methods for the string class.
   /// </summary>
-  public static class StringOperations
+  public static class StringExtensions
   {
     #region Methods
     /// <summary>
@@ -70,6 +66,28 @@ namespace Jabberwocky.Toolkit.String
       RemoveQualifiers(instance, qualifier, ref position, ref index);
 
       return instance.Substring(position, index - position);
+    }
+
+    /// <summary>
+    /// Verifies that the string is not null and not empty. Throws an exception if verification fails.
+    /// </summary>
+    /// <param name="instance">String to verify.</param>
+    public static void VerifyThatStringIsNotNullAndNotEmpty(this String instance)
+    {
+      instance.VerifyThatStringIsNotNullAndNotEmpty("String is null or empty.");
+    }
+
+    /// <summary>
+    /// Verifies that the string is not null and not empty. Throws an exception (with custom message) if verification fails.
+    /// </summary>
+    /// <param name="instance">String to verify.</param>
+    /// <param name="exceptionMessage">Custom message to use in exception.</param>
+    public static void VerifyThatStringIsNotNullAndNotEmpty(this String instance, String exceptionMessage)
+    {
+      if (String.IsNullOrEmpty(instance))
+      {
+        throw new Exception(exceptionMessage);
+      }
     }
 
     private static Int32 GetLastIndexOfUnqualifiedSeperator(String line, String seperator, Char qualifier, Int32 startingIndex)

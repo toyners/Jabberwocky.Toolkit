@@ -46,15 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Array\ArrayExtensions.cs" />
     <Compile Include="IO\DirectoryOperations.cs" />
     <Compile Include="IO\FileReader.cs" />
     <Compile Include="IO\FileReaderFactory.cs" />
     <Compile Include="IO\IStreamReader.cs" />
-    <Compile Include="Assembly\AssemblyOperations.cs" />
+    <Compile Include="Assembly\AssemblyExtensions.cs" />
     <Compile Include="IO\IStreamReaderFactory.cs" />
-    <Compile Include="List\ListOperations.cs" />
+    <Compile Include="List\ListExtensions.cs" />
+    <Compile Include="Object\ObjectExtensions.cs" />
     <Compile Include="Path\PathOperations.cs" />
-    <Compile Include="String\StringOperations.cs" />
+    <Compile Include="String\StringExtensions.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,7 +8,7 @@ namespace Jabberwocky.Toolkit.Assembly
   /// <summary>
   /// Extension methods for the Assembly class.
   /// </summary>
-  public static class AssemblyOperations
+  public static class AssemblyExtensions
   {
     #region Construction
     /// <summary>

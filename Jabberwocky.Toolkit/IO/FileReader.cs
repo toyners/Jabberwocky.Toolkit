@@ -4,7 +4,7 @@ namespace Jabberwocky.Toolkit.IO
   using System;
   using System.IO;
   using System.Text;
-  using Validation;
+  using Jabberwocky.Toolkit.String;
 
   /// <summary>
   /// A file reader with functionality to read a line of characters. Line terminator is '\r\n'

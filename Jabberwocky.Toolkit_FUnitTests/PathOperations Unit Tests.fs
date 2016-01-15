@@ -4,7 +4,7 @@ open Jabberwocky.Toolkit.Path
 open FsUnit
 open NUnit.Framework
 
-module ``Path Operations UnitTests`` =
+module ``PathOperations UnitTests`` =
 
     [<Test>]
     let ``Directory path has no trailing seperator``() =

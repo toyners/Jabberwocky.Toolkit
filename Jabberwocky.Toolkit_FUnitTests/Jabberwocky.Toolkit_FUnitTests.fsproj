@@ -52,10 +52,10 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="AssemblyOperations Unit Tests.fs" />
-    <Compile Include="Path Operations UnitTests.fs" />
-    <Compile Include="String Operations UnitTests.fs" />
-    <Compile Include="ListOperations Unit Tests.fs" />
+    <Compile Include="AssemblyExtensions Unit Tests.fs" />
+    <Compile Include="PathOperations Unit Tests.fs" />
+    <Compile Include="StringExtensions Unit Tests.fs" />
+    <Compile Include="ListExtensions Unit Tests.fs" />
     <Compile Include="DirectoryOperations Unit Tests.fs" />
     <Content Include="packages.config" />
   </ItemGroup>

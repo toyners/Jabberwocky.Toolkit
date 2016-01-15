@@ -4,7 +4,10 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
   using System;
   using System.Collections.Generic;
   using FluentAssertions;
-  using Jabberwocky.Toolkit.Validation;
+  using Jabberwocky.Toolkit.Object;
+  using Jabberwocky.Toolkit.Array;
+  using Jabberwocky.Toolkit.String;
+  using Jabberwocky.Toolkit.List;
   using NUnit.Framework;
 
   [TestFixture]

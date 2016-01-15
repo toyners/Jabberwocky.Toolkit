@@ -3,7 +3,7 @@ namespace Jabberwocky.Toolkit.IO
 {
   using System;
   using System.IO;
-  using Jabberwocky.Toolkit.Validation;
+  using Jabberwocky.Toolkit.String;
 
   /// <summary>
   /// Helper methods for directory functionality. 
