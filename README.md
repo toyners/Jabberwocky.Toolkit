@@ -1,5 +1,5 @@
 # Jabberwocky.Toolkit
-A tookit containing general purpose interfaces, helper code and extension methods.
+A toolkit containing general purpose interfaces, helper code and extension methods.
 
 ## Interfaces
 Provides an interface for a stream reader that includes the ability to read a line (IStreamReader) and 
