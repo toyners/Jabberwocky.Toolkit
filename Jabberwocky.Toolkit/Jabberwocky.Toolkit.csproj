@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Array\ArrayExtensions.cs" />
+    <Compile Include="File\FilePatternResolver.cs" />
     <Compile Include="IO\DirectoryOperations.cs" />
     <Compile Include="IO\FileReader.cs" />
     <Compile Include="IO\FileReaderFactory.cs" />
