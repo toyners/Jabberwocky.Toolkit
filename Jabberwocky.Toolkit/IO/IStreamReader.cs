@@ -15,6 +15,11 @@ namespace Jabberwocky.Toolkit.IO
     Boolean EndOfStream { get; }
 
     /// <summary>
+    /// Gets the length of the stream in bytes.
+    /// </summary>
+    Int64 Length { get; }
+
+    /// <summary>
     /// Gets or sets the position to read from within the stream.
     /// </summary>
     Int64 Position { get; set; }

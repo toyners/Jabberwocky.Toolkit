@@ -124,7 +124,7 @@ namespace Jabberwocky.Toolkit.IO
     }
 
     /// <summary>
-    /// Gets the lenght of the stream in bytes.
+    /// Gets the length of the stream in bytes.
     /// </summary>
     public Int64 Length
     {
