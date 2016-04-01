@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="File\FilePatternResolver_IntegrationTests.cs" />
+    <Compile Include="IO\DirectoryOperations_IntegrationTests.cs" />
     <Compile Include="IO\FileReader_IntegrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

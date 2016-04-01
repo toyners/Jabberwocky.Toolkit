@@ -22,5 +22,20 @@ namespace Jabberwocky.Toolkit.IO
         Directory.CreateDirectory(directoryPath);
       }
     }
+
+    /// <summary>
+    /// Deletes all files and sub directories from the directory. If the directory does not exist it is created.
+    /// </summary>
+    /// <param name="directoryPath">Full path to the directory to empty.</param>
+    public static void EnsureDirectoryIsEmpty(String directoryPath)
+    {
+      directoryPath.VerifyThatStringIsNotNullAndNotEmpty("Parameter 'directoryPath' is null or empty.");
+      if (Directory.Exists(directoryPath))
+      {
+        Directory.Delete(directoryPath, true);
+      }
+
+      Directory.CreateDirectory(directoryPath);
+    }
   }
 }
