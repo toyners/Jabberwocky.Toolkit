@@ -28,13 +28,7 @@ namespace Jabberwocky.Toolkit.Assembly
 
         using (Stream outputStream = File.Create(filePath))
         {
-          Byte[] buffer = new Byte[8192];
-
-          Int32 bytesRead;
-          while ((bytesRead = manifestStream.Read(buffer, 0, buffer.Length)) > 0)
-          {
-            outputStream.Write(buffer, 0, bytesRead);
-          }
+          manifestStream.CopyTo(outputStream);
         }
       }
     }
