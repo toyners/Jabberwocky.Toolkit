@@ -3,6 +3,8 @@
 open Jabberwocky.Toolkit.String
 open FsUnit
 open NUnit.Framework
+open System
+open System.Collections.Generic
 
 module ``StringExtensions Unit Tests`` =
     
@@ -44,3 +46,19 @@ module ``StringExtensions Unit Tests`` =
     let ``Index beyond last seperator so meaningful exception is thrown``() =
         (fun () -> StringExtensions.ExtractField("A,B,C,", ",", '|', 4u) |> ignore) 
         |> should (throwWithMessage "Index 4 is out of range in line 'A,B,C,' when using seperator (\",\") and qualifier ('|').") typeof<System.IndexOutOfRangeException>
+
+    [<Test>]
+    let ``Illegal file characters are substituted correctly``() = 
+        let d = dict[
+                        "\\", "_backslash_"; 
+                        "/", "_forwardslash_"; 
+                        ":", "_colon_"; 
+                        "*", "_asterix_";
+                        "?", "_question_";
+                        "\"", "_quote_";
+                        "<", "_lessthan_";
+                        ">", "_rightthan_";
+                        "|", "_bar_"
+                        ]
+
+        StringExtensions.Substitute("\\/:*?\"<>|", d) |> should equal "_backslash__forwardslash__colon__asterix__question__quote__lessthan__rightthan__bar_"

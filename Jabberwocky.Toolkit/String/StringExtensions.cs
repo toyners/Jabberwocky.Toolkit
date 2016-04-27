@@ -2,6 +2,7 @@
 namespace Jabberwocky.Toolkit.String
 {
   using System;
+  using System.Collections.Generic;
 
   /// <summary>
   /// Extension methods for the string class.
@@ -66,6 +67,24 @@ namespace Jabberwocky.Toolkit.String
       RemoveQualifiers(instance, qualifier, ref position, ref index);
 
       return instance.Substring(position, index - position);
+    }
+
+    /// <summary>
+    /// Substitute fragments within a string based on a dictionary of find and replace values. 
+    /// </summary>
+    /// <param name="instance">String to substitute values.</param>
+    /// <param name="dictionary">Contains key to find in the string and values to replace them with.</param>
+    /// <returns>String with values substituted.</returns>
+    public static String Substitute(this String instance, IDictionary<String, String> dictionary)
+    {
+      System.Text.StringBuilder sb = new System.Text.StringBuilder(instance);
+      
+      foreach (KeyValuePair<String, String> pair in dictionary)
+      {
+        sb = sb.Replace(pair.Key, pair.Value);
+      }
+
+      return sb.ToString();
     }
 
     /// <summary>
