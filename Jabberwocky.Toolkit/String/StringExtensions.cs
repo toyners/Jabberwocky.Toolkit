@@ -70,6 +70,17 @@ namespace Jabberwocky.Toolkit.String
     }
 
     /// <summary>
+    /// Returns a pluralised version of the string (appended s character) if the count is not 1.
+    /// </summary>
+    /// <param name="instance">Word to pluralize.</param>
+    /// <param name="count">Number of items.</param>
+    /// <returns>Plural form of the word if count is not one; otherwise returns the original word.</returns>
+    public static String Pluralize(this String instance, UInt32 count)
+    {     
+      return instance + (count != 1 ? "s" : null);
+    }
+
+    /// <summary>
     /// Substitute fragments within a string based on a dictionary of find and replace values. 
     /// </summary>
     /// <param name="instance">String to substitute values.</param>

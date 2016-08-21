@@ -62,3 +62,10 @@ module ``StringExtensions Unit Tests`` =
                         ]
 
         StringExtensions.Substitute("\\/:*?\"<>|", d) |> should equal "_backslash__forwardslash__colon__asterix__question__quote__lessthan__rightthan__bar_"
+
+    [<Test>]
+    [<TestCase("Item", 1, "Item")>]
+    [<TestCase("Item", 0, "Items")>]
+    [<TestCase("Item", 2, "Items")>]
+    let ``Pluralize word when count is different scenarios``(word : string, count : int, expectedReturn : string) = 
+        StringExtensions.Pluralize(word, (uint32)count) |> should equal expectedReturn
