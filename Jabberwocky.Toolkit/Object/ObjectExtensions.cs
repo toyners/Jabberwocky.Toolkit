@@ -30,7 +30,7 @@ namespace Jabberwocky.Toolkit.Object
     {
       if (instance == null)
       {
-        throw new Exception(exceptionMessage);
+        throw new NullReferenceException(exceptionMessage);
       }
     }
   }

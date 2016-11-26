@@ -39,24 +39,6 @@ namespace Jabberwocky.Tookit_UnitTests.Validation
     }
 
     [Test]
-    public void VerifyThatObjectIsNotNull_ObjectIsNull_ExpectedExceptionIsThrown()
-    {
-      Object instance = null;
-      Action action = () => instance.VerifyThatObjectIsNotNull();
-
-      action.ShouldThrow<Exception>().WithMessage("Object is null.");
-    }
-
-    [Test]
-    public void VerifyThatObjectIsNotNull_ObjectIsNullWithCustomMessage_ExpectedExceptionIsThrown()
-    {
-      Object instance = null;
-      Action action = () => instance.VerifyThatObjectIsNotNull("Custom exception message.");
-
-      action.ShouldThrow<Exception>().WithMessage("Custom exception message.");
-    }
-
-    [Test]
     public void VerifyThatObjectIsNotNull_ObjectIsNotNull_ExceptionNotThrown()
     {
       Object instance = new Object();

@@ -58,6 +58,7 @@
     <Compile Include="ListExtensions Unit Tests.fs" />
     <Compile Include="DirectoryOperations Unit Tests.fs" />
     <Content Include="packages.config" />
+    <Compile Include="ObjectExtensions_UnitTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsUnit.NUnit">
