@@ -60,6 +60,7 @@
     <Compile Include="String\StringExtensions.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WPF\NotifyPropertyChangedBase.cs" />
     <Compile Include="WPF\VisualTreeHelperExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
