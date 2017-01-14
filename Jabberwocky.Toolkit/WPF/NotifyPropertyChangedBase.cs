@@ -5,6 +5,7 @@ namespace Jabberwocky.Toolkit.WPF
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Runtime.CompilerServices;
+  using Object;
 
   /// <summary>
   /// Provides mechanism for raising notifications for property changes when underlying fields are updated.
@@ -26,6 +27,23 @@ namespace Jabberwocky.Toolkit.WPF
 
       fieldValue = newValue;
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    protected Boolean TryInvokePropertyChanged(params PropertyChangedEventArgs[] propertyChangedEventArgs)
+    {
+      propertyChangedEventArgs.VerifyThatObjectIsNotNull("Parameter 'propertyChangedEventArgs' is null.");
+
+      if (this.PropertyChanged == null)
+      {
+        return false;
+      }
+
+      foreach(var propertyChangedEventArg in propertyChangedEventArgs)
+      {
+        this.PropertyChanged.Invoke(this, propertyChangedEventArg);
+      }
+
+      return true;
     }
   }
 }
