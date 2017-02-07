@@ -60,6 +60,7 @@
     <Compile Include="IO\IStreamReaderFactory.cs" />
     <Compile Include="List\ListExtensions.cs" />
     <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Object\ObjectExtensions.cs" />
     <Compile Include="Path\PathOperations.cs" />
     <Compile Include="String\StringExtensions.cs" />
