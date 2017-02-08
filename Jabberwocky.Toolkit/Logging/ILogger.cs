@@ -6,7 +6,7 @@ namespace Jabberwocky.Toolkit.Logging
   /// <summary>
   /// Provides functionality for logging general messages and exceptions.
   /// </summary>
-  public interface ILogger
+  public interface ILogger : IDisposable
   {
     /// <summary>
     /// Logs a general message.
