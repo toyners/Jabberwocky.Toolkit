@@ -29,6 +29,11 @@ namespace Jabberwocky.Toolkit.WPF
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
+    /// <summary>
+    /// Attempts to invoke the property changed event with the property changed event arguments pass in.
+    /// </summary>
+    /// <param name="propertyChangedEventArgs">Array of property changed event arguments to be invoked.</param>
+    /// <returns>True if property changed event is not null and all property changed event arguments were invoked, otherwise false.</returns>
     protected Boolean TryInvokePropertyChanged(params PropertyChangedEventArgs[] propertyChangedEventArgs)
     {
       propertyChangedEventArgs.VerifyThatObjectIsNotNull("Parameter 'propertyChangedEventArgs' is null.");
