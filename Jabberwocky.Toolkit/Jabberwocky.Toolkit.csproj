@@ -62,6 +62,7 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Object\ObjectExtensions.cs" />
+    <Compile Include="PathFinding\PathFinder.cs" />
     <Compile Include="Path\PathOperations.cs" />
     <Compile Include="String\StringExtensions.cs" />
     <Compile Include="Validation\Validation.cs" />
