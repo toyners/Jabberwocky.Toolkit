@@ -2,9 +2,6 @@
 
 open System
 open Jabberwocky.Toolkit.Object
-//open System.IO
-//open FsUnit
-//open Jabberwocky.Toolkit.IO
 open NUnit.Framework
 
 type ObjectExtensions_UnitTests() =
