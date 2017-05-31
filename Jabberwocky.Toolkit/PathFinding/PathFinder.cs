@@ -79,8 +79,6 @@ namespace Jabberwocky.Toolkit.PathFinding
       this.totalCostOfStartToGoalViaThisPoint.Clear();
 
       return list;
-
-      throw new NotImplementedException();
     }
 
     protected virtual Single CalculateDistanceCoveringAllVerticies()
