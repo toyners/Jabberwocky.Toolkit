@@ -12,7 +12,7 @@ namespace Jabberwocky.Toolkit.WPF
     /// <typeparam name="T">Type of child element to be returned.</typeparam>
     /// <param name="parent">Parent element that contains child element of interest.</param>
     /// <returns>First child element matching type element or type default.</returns>
-    public static T GetDescendantByType<T>(this Visual parent) where T : class
+    public static T GetDescendantByType<T>(this DependencyObject parent) where T : class
     {
       if (parent == null)
       {
@@ -22,11 +22,6 @@ namespace Jabberwocky.Toolkit.WPF
       if (parent.GetType() == typeof(T))
       {
         return parent as T;
-      }
-
-      if (parent is FrameworkElement)
-      {
-        (parent as FrameworkElement).ApplyTemplate();
       }
 
       T foundElement = null;
