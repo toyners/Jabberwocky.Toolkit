@@ -24,6 +24,12 @@ namespace Jabberwocky.Toolkit.WPF
         return parent as T;
       }
 
+      var frameworkElement = parent as FrameworkElement;
+      if (frameworkElement != null)
+      {
+        frameworkElement.ApplyTemplate();
+      }
+
       T foundElement = null;
       for (var i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
       {
