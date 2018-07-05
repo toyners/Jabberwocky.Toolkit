@@ -17,6 +17,12 @@ namespace Jabberwocky.Toolkit.IO
     public static void EnsureDirectoryExists(String directoryPath)
     {
       directoryPath.VerifyThatStringIsNotNullAndNotEmpty("Parameter 'directoryPath' is null or empty.");
+
+      /*if (File.Exists(directoryPath))
+      {
+        throw new Exception($"Cannot create directory '{directoryPath}' because it already exists as a file.");
+      }*/
+
       if (!Directory.Exists(directoryPath))
       {
         Directory.CreateDirectory(directoryPath);

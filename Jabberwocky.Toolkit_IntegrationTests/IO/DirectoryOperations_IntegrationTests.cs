@@ -68,6 +68,19 @@ namespace Jabberwocky.Toolkit_IntegrationTests.IO
       Directory.Exists(directoryPath).ShouldBeTrue();
       Directory.GetFileSystemEntries(directoryPath).Length.ShouldBe(0);
     }
+
+    [Test]
+    public void FileWithSameNameAlreadyExists()
+    {
+      // Arrange
+      String directoryPath = Path.GetTempPath() + Path.GetRandomFileName();
+      File.WriteAllText(directoryPath, "File Content");
+
+      // Act
+      DirectoryOperations.EnsureDirectoryExists(directoryPath);
+
+      // Assert
+    }
     #endregion 
   }
 }
