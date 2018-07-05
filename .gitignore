@@ -155,4 +155,6 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 /packages
-/.vs/config
+
+# Visual Studio 2015 cache/options directory
+/.vs

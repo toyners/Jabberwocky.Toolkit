@@ -10,7 +10,7 @@ namespace Jabberwocky.Toolkit.Assembly
   /// </summary>
   public static class AssemblyExtensions
   {
-    #region Construction
+    #region Methods
     /// <summary>
     /// Writes the embedded resource from an assembly to disk.
     /// </summary>
