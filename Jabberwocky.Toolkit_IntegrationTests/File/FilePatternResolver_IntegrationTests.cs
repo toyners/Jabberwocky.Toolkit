@@ -19,7 +19,7 @@ namespace Jabberwocky.Toolkit_IntegrationTests.File
     private String thirdFileName = null;
     private String fourthFileName = null;
 
-    [TestFixtureSetUp]
+    [OneTimeSetUp]
     public void SetUpBeforeAllTests()
     {
       this.parentDirectory = Path.GetTempPath() + @"FilePatternResolver_IntegrationTests\";

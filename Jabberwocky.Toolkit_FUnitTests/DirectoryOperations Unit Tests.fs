@@ -1,9 +1,8 @@
 ﻿namespace Jabberwocky.Toolkit_FUnitTests
 
 open System.IO
-open FsUnit
-open Jabberwocky.Toolkit.IO
 open NUnit.Framework
+open Jabberwocky.Toolkit.IO
 
 module ``DirectoryOperations Unit Tests`` =
 
@@ -11,9 +10,9 @@ module ``DirectoryOperations Unit Tests`` =
     let ``Directory does not exist so is created``() =
         let directoryPath = Path.GetTempPath() + Path.GetRandomFileName();
 
-        Directory.Exists(directoryPath) |> should be False
+        Assert.AreEqual(false, Directory.Exists(directoryPath))
         DirectoryOperations.EnsureDirectoryExists(directoryPath) |> ignore
-        Directory.Exists(directoryPath) |> should be True
+        Assert.AreEqual(true, Directory.Exists(directoryPath))
 
         Directory.Delete(directoryPath) |> ignore
 
@@ -22,6 +21,7 @@ module ``DirectoryOperations Unit Tests`` =
         let directoryPath = Path.GetTempPath() + Path.GetRandomFileName();
         Directory.CreateDirectory(directoryPath) |> ignore
         DirectoryOperations.EnsureDirectoryExists(directoryPath) |> ignore
-        Directory.Exists(directoryPath) |> should be True
+
+        Assert.AreEqual(true, Directory.Exists(directoryPath))
 
         Directory.Delete(directoryPath) |> ignore

@@ -18,10 +18,10 @@ namespace Jabberwocky.Toolkit.IO
     {
       directoryPath.VerifyThatStringIsNotNullAndNotEmpty("Parameter 'directoryPath' is null or empty.");
 
-      /*if (File.Exists(directoryPath))
+      if (File.Exists(directoryPath))
       {
-        throw new Exception($"Cannot create directory '{directoryPath}' because it already exists as a file.");
-      }*/
+        throw new IOException($"Cannot create directory '{directoryPath}' because a file with the same name already exists.");
+      }
 
       if (!Directory.Exists(directoryPath))
       {

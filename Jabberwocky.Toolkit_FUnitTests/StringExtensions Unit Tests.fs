@@ -1,12 +1,10 @@
 ﻿namespace Jabberwocky.Toolkit_FUnitTests
 
 open Jabberwocky.Toolkit.String
-open FsUnit
 open NUnit.Framework
-open System
-open System.Collections.Generic
 
 module ``StringExtensions Unit Tests`` =
+    open NUnit.Framework
     
     [<Test>]
     [<TestCase(0u, "ABCD", ",", "ABCD")>]
@@ -35,17 +33,20 @@ module ``StringExtensions Unit Tests`` =
     [<TestCase(3u, "A<sep>B<sep>C<sep>|D<sep>4", "<sep>", "D<sep>4")>]
     [<TestCase(2u, "A<sep>B<sep>|C<sep>3<sep>D", "<sep>", "C<sep>3<sep>D")>]
     let ``Correct field returned from different extract scenarios``(index: uint32, line: string, seperator: string, expectedResult: string) =
-        StringExtensions.ExtractField(line, seperator, '|', index) |> should equal expectedResult
+        Assert.AreEqual(expectedResult, StringExtensions.ExtractField(line, seperator, '|', index))
 
     [<Test>]
     let ``Index beyond line so meaningful exception is thrown``() =
-        (fun () -> StringExtensions.ExtractField("A,B,C,D", ",", '|', 4u) |> ignore) 
-        |> should (throwWithMessage "Index 4 is out of range in line 'A,B,C,D' when using seperator (\",\") and qualifier ('|').") typeof<System.IndexOutOfRangeException>
+
+        Assert.Throws<System.IndexOutOfRangeException>( 
+            (fun () -> StringExtensions.ExtractField("A,B,C,D", ",", '|', 4u) |> ignore),
+            "Index 4 is out of range in line 'A,B,C,D' when using seperator (\",\") and qualifier ('|').") |> ignore
 
     [<Test>]
     let ``Index beyond last seperator so meaningful exception is thrown``() =
-        (fun () -> StringExtensions.ExtractField("A,B,C,", ",", '|', 4u) |> ignore) 
-        |> should (throwWithMessage "Index 4 is out of range in line 'A,B,C,' when using seperator (\",\") and qualifier ('|').") typeof<System.IndexOutOfRangeException>
+        Assert.Throws<System.IndexOutOfRangeException>( 
+            (fun () -> StringExtensions.ExtractField("A,B,C,", ",", '|', 4u) |> ignore),
+            "Index 4 is out of range in line 'A,B,C,' when using seperator (\",\") and qualifier ('|').") |> ignore
 
     [<Test>]
     let ``Illegal file characters are substituted correctly``() = 
@@ -61,11 +62,11 @@ module ``StringExtensions Unit Tests`` =
                         "|", "_bar_"
                         ]
 
-        StringExtensions.Substitute("\\/:*?\"<>|", d) |> should equal "_backslash__forwardslash__colon__asterix__question__quote__lessthan__rightthan__bar_"
+        Assert.AreEqual("_backslash__forwardslash__colon__asterix__question__quote__lessthan__rightthan__bar_", StringExtensions.Substitute("\\/:*?\"<>|", d))
 
     [<Test>]
     [<TestCase("Item", 1, "Item")>]
     [<TestCase("Item", 0, "Items")>]
     [<TestCase("Item", 2, "Items")>]
     let ``Pluralize word when count is different scenarios``(word : string, count : int, expectedReturn : string) = 
-        StringExtensions.Pluralize(word, (uint32)count) |> should equal expectedReturn
+        Assert.AreEqual(expectedReturn, StringExtensions.Pluralize(word, (uint32)count))

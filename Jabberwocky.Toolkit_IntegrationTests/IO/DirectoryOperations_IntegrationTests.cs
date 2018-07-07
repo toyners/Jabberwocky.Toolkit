@@ -11,16 +11,6 @@ namespace Jabberwocky.Toolkit_IntegrationTests.IO
   public class DirectoryOperations_IntegrationTests
   {
     #region Methods
-    [TestFixtureSetUp]
-    public void SetupBeforeAllTests()
-    {
-    }
-
-    [SetUp]
-    public void SetupBeforeEachTest()
-    {
-    }
-
     [Test]
     public void NonExistantDirectoryIsCreated()
     {
@@ -76,10 +66,9 @@ namespace Jabberwocky.Toolkit_IntegrationTests.IO
       String directoryPath = Path.GetTempPath() + Path.GetRandomFileName();
       File.WriteAllText(directoryPath, "File Content");
 
-      // Act
-      DirectoryOperations.EnsureDirectoryExists(directoryPath);
-
-      // Assert
+      // Act and Assert
+      Assert.Throws<IOException>(() => { DirectoryOperations.EnsureDirectoryExists(directoryPath); },
+        $"Cannot create directory '{directoryPath}' because a file with the same name already exists.");
     }
     #endregion 
   }
