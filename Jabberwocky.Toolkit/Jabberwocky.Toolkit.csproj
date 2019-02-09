@@ -42,6 +42,9 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +64,10 @@
     <Compile Include="List\ListExtensions.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
+    <Compile Include="MessageBox\CustomMessageBox.cs" />
+    <Compile Include="MessageBox\CustomMessageBoxResult.cs" />
+    <Compile Include="MessageBox\CustomMessageBoxWindow.xaml.cs" />
+    <Compile Include="MessageBox\CustomeMessageBoxUtil.cs" />
     <Compile Include="Object\ObjectExtensions.cs" />
     <Compile Include="PathFinding\PathFinder.cs" />
     <Compile Include="Path\PathOperations.cs" />
@@ -77,7 +84,12 @@
     <None Include="packages.config" />
     <None Include="UploadNuGetPackage.cmd" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="MessageBox\CustomMessageBoxWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -1,0 +1,49 @@
+﻿<Window x:Class="Jabberwocky.Toolkit.MessageBox.CustomMessageBoxWindow"
+        x:ClassModifier="public"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        ShowInTaskbar="False" Topmost="True"
+        ResizeMode="NoResize" SizeToContent="WidthAndHeight"
+        TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType" UseLayoutRounding="True"
+        Title="" MinHeight="155" MaxWidth="470" MinWidth="200" Closing="Window_Closing">
+    <!-- todo: The TextOptions properties above fix a minor blurry image issue, but are only compatible with >= .NET 4.0 -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="White" MinHeight="69">
+            <DockPanel>
+                <Image Name="Image_MessageBox" Width="32" Height="32" HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="30,0,0,0" Visibility="Collapsed"/>
+                <TextBlock Name="TextBlock_Message" TextWrapping="Wrap" MaxWidth="500" Width="Auto"
+                       VerticalAlignment="Center" Margin="12,20,41,15" />
+            </DockPanel>
+        </Grid>
+        <Grid Name="CheckBox_Grid" Grid.Row="1" Background="White" MinHeight="20" Visibility="Collapsed" >
+            <DockPanel Margin="0,0,15,0">
+                <CheckBox Name="CheckBox_Option" DockPanel.Dock="Right" HorizontalAlignment="Right" />
+            </DockPanel>
+        </Grid>
+        <Grid Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" MinHeight="46">
+            <DockPanel Margin="5,0">
+                <ItemsControl Name="Items" ItemsSource="{Binding Buttons}" DockPanel.Dock="Right">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Margin="2,0" Height="26" MinWidth="80" IsCancel="{Binding IsCancel}" IsDefault="{Binding IsDefault}" Click="Button_Click">
+                                <Label Content="{Binding Caption}" Margin="10,0" Padding="0" />
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>
